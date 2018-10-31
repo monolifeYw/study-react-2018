@@ -29,7 +29,8 @@ class SearchBar extends Component {
       <div className="search-bar">
         <input 
           value={this.state.term}
-          onChange={evt => this.setState({ term: evt.target.value })} 
+          // onChange={evt => this.setState({ term: evt.target.value })} 
+          onChange={evt => this.onInputChange(evt.target.value)} 
         />
         <br />
         value of input: {this.state.term}
@@ -38,7 +39,11 @@ class SearchBar extends Component {
   }
 
   // naming : on/handle + 요소(element) + Event name
-  onInputChange(evt) {
+  onInputChange(term) {
+
+    this.setState({ term });
+    this.props.onSearchTermChange(term);
+
     // console.log(evt);
     // console.log(evt.target.value);
   }
