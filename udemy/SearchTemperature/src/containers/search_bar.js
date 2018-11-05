@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 
-export default class SearchBar extends Component {
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { fetchWhether } from '../actions';
+
+class SearchBar extends Component {
   constructor(props) {
     super(props);
 
@@ -8,15 +12,19 @@ export default class SearchBar extends Component {
 
     // bind
     this.onInputChange = this.onInputChange.bind(this);
+    this.onFormSubmit = this.onFormSubmit.bind(this);
   }
 
   onInputChange(evt) {
-    // console.log('evt.target.value', evt.target.value);
+    console.log('evt.target.value', evt.target.value);
     this.setState({term: evt.target.value});
   }
 
   onFormSubmit(evt) {
     evt.preventDefault();
+
+    this.props.fetchWhether(this.state.term);
+    this.setState({term: ''});
   }
 
   render() {
@@ -38,3 +46,11 @@ export default class SearchBar extends Component {
     );
   }
 }
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ fetchWhether }, dispatch);
+}
+
+export default connect(null, mapDispatchToProps)(SearchBar);
+
+

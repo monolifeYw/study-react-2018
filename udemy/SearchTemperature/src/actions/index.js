@@ -7,10 +7,12 @@ export const FETCH_WHETHER = 'FETCH_WHETHER';
 
 export function fetchWhether(city) {
   const url = `${API_URL}&q=${city},us`;
-  const request = axios.get(url);
+  const request = axios.get(url); // promise 반환
+
+  console.log('request : ', request);
 
   return {
     type: FETCH_WHETHER,
-    payload: request
+    payload: request // promise 가 payload 의 property 로 전달
   };
 }
