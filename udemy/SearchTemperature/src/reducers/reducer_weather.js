@@ -1,11 +1,20 @@
 import { FETCH_WHETHER } from '../actions';
 
-export default function (state = null, action) {
-  console.log('[reducer receive weather]', action);
+export default function (state = [], action) {
+  // console.log('[reducer receive weather]', action);
+  console.log('reducer_weather state : ', state);
+
+  if (action.payload && action.payload.data) {
+    // console.log('action payload : ', action.payload.data);
+    // console.log('action payload : ', [action.payload.data]);
+    // console.log('action payload : ', Object.prototype.toString.call(action.payload.data.list));
+  }
 
   switch(action.type) {
-    case `${FETCH_WHETHER}`:
-      return action.payload;
+    case FETCH_WHETHER:
+      // ... : 배열에서 모든 엔트리를 가져와서 새 배열에 집어넣는다.
+      return [ action.payload.data, ...state ];
+      // return state.concat([ action.payload.data ]);
   }
 
   return state;
