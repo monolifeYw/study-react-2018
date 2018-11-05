@@ -2,12 +2,17 @@ import { FETCH_WHETHER } from '../actions';
 
 export default function (state = [], action) {
   // console.log('[reducer receive weather]', action);
-  console.log('reducer_weather state : ', state);
+  console.log('reducer_weather state : ', action);
 
   if (action.payload && action.payload.data) {
     // console.log('action payload : ', action.payload.data);
     // console.log('action payload : ', [action.payload.data]);
     // console.log('action payload : ', Object.prototype.toString.call(action.payload.data.list));
+  }
+
+  if (action.error) {
+    console.log('error', state);
+    return state;
   }
 
   switch(action.type) {
