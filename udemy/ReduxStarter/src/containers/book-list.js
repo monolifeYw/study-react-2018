@@ -1,11 +1,21 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 
+import { selectBook } from '../actions/index';
+import { bindActionCreators } from 'redux';
+
 class BookList extends Component {
   renderList() {
+    console.log('[Render]BookList');
     return this.props.books.map(book => {
       return (
-        <li key={book.title} className="list-group-item">{book.title}</li>
+        <li
+          key={book.title}
+          className="list-group-item"
+          onClick={() => this.props.selectBook(book)}
+        >
+          {book.title}
+        </li>
       );
     });
   }
@@ -28,5 +38,11 @@ function mapStateToProps(state) {
   };
 }
 
+// action
+function mapDispatchToProps(dispatch) {
+  // selectBook 이 호출될 때마다 결과는 리듀서로 전달되어야 함
+  return bindActionCreators({ selectBook: selectBook }, dispatch);
+}
+
 // 컨테이너는 리덕스에 속한 스테이트를 다룰 수 있는 컴포넌트
-export default connect(mapStateToProps)(BookList);
+export default connect(mapStateToProps, mapDispatchToProps)(BookList);
