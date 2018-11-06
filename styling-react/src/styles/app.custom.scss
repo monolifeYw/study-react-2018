@@ -1,0 +1,39 @@
+$primary-color: #333;
+$second-color: #27b462;
+
+.base {
+  background: #00f;
+}
+
+.box {
+  background: $primary-color;
+  width: 600px / 2;
+  height: 200px;
+
+  span {
+    color: #f00;
+  }
+}
+
+.smallbox {
+  background: darken($second-color, 30%);
+  width: 100px;
+}
+
+.box_extend {
+  @extend .box;
+  border: 2px solid greenyellow;
+}
+
+
+@mixin headline ($color, $size) {
+  color: $color;
+  font-size: $size;
+}
+
+h1 {
+  @include headline(orange, 15);
+  text-align: center;
+}
+
+
