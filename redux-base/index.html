@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+
+  <title>JS Bin</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.0.1/redux.js"></script>
+  <script>
+  // action type
+  const INCREMENT = 'INCREMENT';
+  const DECREMENT = 'DECREMENT';
+
+  // action creator
+  const increment = (diff) => ({
+    type: INCREMENT,
+    diff
+  });
+
+  const decrement = (diff) => ({
+    type: DECREMENT,
+    diff
+  });
+
+  // console.log(increment(1));
+  // console.log(decrement(1));
+
+  // reducer
+  const initialState = {
+    number: 0,
+    foo: 'bar',
+    bar: 'qux'
+  }
+
+  function counterReducer(state = initialState, action) {
+    switch (action.type) {
+      case INCREMENT:
+        // return Object.assign({}, state, {number: state.number + action.diff});
+        return {
+          ...state, number: state.number + action.diff
+        }
+      case DECREMENT:
+        return Object.assign({}, state, {number: state.number - action.diff});
+      default:
+        return state;
+    }
+  }
+
+  // console.log(counterReducer(undefined, increment(77)));
+
+  // redux
+  const { createStore } = Redux;
+  const store = createStore(counterReducer);
+  const unsubscribe = store.subscribe(() => {
+    console.log('change state', store.getState());
+  });
+
+  store.dispatch(increment(1));
+  store.dispatch(decrement(5));
+  store.dispatch(increment(2));
+
+  </script>
+</head>
+<body>
+
+</body>
+</html>
