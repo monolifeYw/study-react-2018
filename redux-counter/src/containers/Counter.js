@@ -64,10 +64,11 @@ Counter.defaultProps = {
 }
 
 function mapStateToProps(state) {
-  console.log(state);
+  console.log('[mapStateToProps]', state);
+  console.log('===========================');
   return {
-    number: state.number,
-    color: state.color
+    number: state.numberReducer.number,
+    color: state.colorReducer.color
   }
 }
 
