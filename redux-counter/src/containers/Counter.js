@@ -2,6 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { increment, decrement, setColor } from '../actions';
+
+
 const CounterWrap = styled.div`
   width: 10rem;
   height: 10rem;
@@ -17,9 +22,16 @@ const CounterWrap = styled.div`
   transition: background-color 0.75s;
 `;
 
+export function getRandomColor() {
+  const colors = ['red', 'skyblue', 'blue', 'orange', 'green'];
+  const random = Math.floor(Math.random() * colors.length);
+  return colors[random];
+}
+
 const Counter = ({
   number, color, onIncrement, onDecrement, onSetColor
 }) => {
+
   return (
     <CounterWrap
       onClick={onIncrement}
@@ -27,7 +39,7 @@ const Counter = ({
         evt.preventDefault();
         onDecrement();
       }}
-      onDoubleClick={onSetColor}
+      onDoubleClick={() => onSetColor(getRandomColor())}
       style={{background: color}}
     >
       {number}
@@ -51,4 +63,20 @@ Counter.defaultProps = {
   onSetColor: () => console.warn('onSetColor is not found')
 }
 
-export default Counter;
+function mapStateToProps(state) {
+  console.log(state);
+  return {
+    number: state.number,
+    color: state.color
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({
+    onIncrement: increment,
+    onDecrement: decrement,
+    onSetColor: setColor
+  }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Counter);
