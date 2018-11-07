@@ -40,6 +40,24 @@ export default (state = initialState, action) => {
         counters: counters.slice(0, counters.length -1)
       };
 
+    case types.INCREMENT:
+      console.log('INCREMENT', [...counters]);
+      console.log('INCREMENT2', {...counters});
+      console.log('INCREMENT3', counters[action.index]);
+      // return state;
+      return {
+        counters: [
+          ...counters.slice(0, action.index),
+          {
+            ...counters[action.index],
+            number: counters[action.index].number + 1
+          },
+          ...counters.slice(action.index + 1, counters.length)
+        ]
+      }
+
+
+
     default:
       return state;
   }
