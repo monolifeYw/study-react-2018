@@ -2,10 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { increment, decrement, setColor } from '../actions';
-
 
 const CounterWrap = styled.div`
   width: 10rem;
@@ -22,24 +18,18 @@ const CounterWrap = styled.div`
   transition: background-color 0.75s;
 `;
 
-export function getRandomColor() {
-  const colors = ['red', 'skyblue', 'blue', 'orange', 'green'];
-  const random = Math.floor(Math.random() * colors.length);
-  return colors[random];
-}
-
 const Counter = ({
-  number, color, onIncrement, onDecrement, onSetColor
+  number, color, index, onIncrement, onDecrement, onSetColor
 }) => {
 
   return (
     <CounterWrap
-      onClick={onIncrement}
+      onClick={() => onIncrement(index)}
       onContextMenu={(evt) => {
         evt.preventDefault();
-        onDecrement();
+        onDecrement(index);
       }}
-      onDoubleClick={() => onSetColor(getRandomColor())}
+      onDoubleClick={() => onSetColor(index)}
       style={{background: color}}
     >
       {number}
@@ -48,6 +38,7 @@ const Counter = ({
 };
 
 Counter.propTypes = {
+  index: PropTypes.number,
   number: PropTypes.number,
   color: PropTypes.string,
   onIncrement: PropTypes.func,
@@ -56,6 +47,7 @@ Counter.propTypes = {
 }
 
 Counter.defaultProps = {
+  index: 0,
   number: 0,
   color: 'black',
   onIncrement: () => console.warn('onIncrement is not found'),
@@ -63,21 +55,4 @@ Counter.defaultProps = {
   onSetColor: () => console.warn('onSetColor is not found')
 }
 
-function mapStateToProps(state) {
-  console.log('[mapStateToProps]', state);
-  console.log('===========================');
-  return {
-    number: state.numberReducer.number,
-    color: state.colorReducer.color
-  }
-}
-
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({
-    onIncrement: increment,
-    onDecrement: decrement,
-    onSetColor: setColor
-  }, dispatch);
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Counter);
+export default Counter;

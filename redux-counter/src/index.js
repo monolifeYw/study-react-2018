@@ -12,7 +12,7 @@ import reducers from './reducers';
 // const createStoreWithMiddleware = applyMiddleware()(createStore);
 
 // store
-const store = createStore(reducers);
+const store = createStore(reducers, window.devToolsExtension && window.devToolsExtension());
 
 ReactDOM.render(
   (
