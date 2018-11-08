@@ -1,6 +1,7 @@
 import React from 'react';
 import Counter from './Counter';
-import * as actions from '../actions';
+// import * as actions from '../actions';
+import * as actions from '../ducks';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
@@ -11,7 +12,7 @@ const CounterLists = ({
   onSetColor
 }) => {
   const CounterList = counters.map((counter, idx) => {
-    console.log('counter', counter, idx);
+    // console.log('counter', counter, idx);
     return (
       <Counter
         key={idx}
@@ -32,7 +33,11 @@ const CounterLists = ({
 }
 
 
-const mapStateToProps = (state) => ({counters: state.counters});
+// const mapStateToProps = (state) => ({counters: state.counters});
+// const mapStateToProps = (state) => ({counters: state.toJS().counters});
+const mapStateToProps = (state) => {
+  return {counters: state.toJS().counters};
+}
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
   onIncrement: actions.increment,

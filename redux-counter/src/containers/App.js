@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import CounterLists from './CounterLists';
 import Button from '../components/Button';
-import * as actions from '../actions';
+import * as actions from '../ducks';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import getRandomColor from '../lib/getRandomColor';
