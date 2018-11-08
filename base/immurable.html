@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+
+  <title>JS Bin</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/immutable/3.8.2/immutable.js"></script>
+  <script>
+    const { List, Map, fromJS } = Immutable;
+
+    //======================================================
+    let data = Map({
+      a:1,
+      b:2,
+      c: Map({
+        c1: 5,
+        c2: 6,
+        c3: 7
+      })
+    });
+
+    console.log('Map data', data);
+
+    const data2 = fromJS({
+      a:1,
+      b:2,
+      c: {
+        c1: 5,
+        c2: 6,
+        c3: 7
+      }
+    });
+
+    console.log('fromJS data', data2);
+
+    // Transfer to Normal Object from Immurable
+    const deserialized = data.toJS();
+    console.log('data deserialized', deserialized);
+
+    // data get in
+    console.log(data.get('a')); //1
+    console.log(data.getIn(['c', 'c3'])); // 7
+
+    const newSetInData = data.setIn(['c', 'c1'], 3).setIn(['c', 'c3'], 999)
+    console.log('newSetInData', newSetInData);
+
+    // set to Multiple value
+    const newMergeData = data.mergeIn(['c'], {c1: 3, c3:999});
+    console.log('newMergeData', newMergeData);
+
+    //======================================================
+    const list = List([0, 1, 2, 3, 4]);
+    const list2 = List([
+      Map({ value: 7 }),
+      Map({ value: 2 })
+    ]);
+    const list3 = fromJS([
+      { value: 3 },
+      { value: 4 }
+    ]);
+    const list4 = fromJS([
+      { value: 1 },
+      { value: 2 },
+      { value: 3 },
+      { value: 4 },
+      { value: 5 },
+      { value: 6 }
+    ]);
+
+    console.log('list2 get', list2.get(0));
+    console.log('list2 getIn value', list2.getIn([1, 'value']));
+
+    // n 번째 아이템 수정시(통째로 변경시)
+    const newList = list2.set(1, Map({value: 1}));
+
+    console.log('newList', newList.getIn([0, 'value']));
+    const newList2 = newList.update(0, (item) => {
+      // return ite
+      //console.log(item.get('value')); // 7
+
+      return item.set('value', item.get('value') - 3);
+    });
+    console.log('newList2', newList2.getIn([0, 'value'])); // 4
+
+
+    // Map 의 내부값을 변경하고 싶을때
+    const newDetailList = list3.setIn([0, 'value'], 77);
+
+    // delete method
+    const deleteList = list4.delete(3); // value: 4 가 삭제
+
+    // push, unshift, pop, isEmpty
+
+
+  </script>
+</head>
+<body>
+
+</body>
+</html>
