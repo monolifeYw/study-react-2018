@@ -1,5 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as actions from '../reducer/ducks';
 
 const TodoInputWrapper = styled.div`
   display: flex;
@@ -25,10 +28,9 @@ const TodoInputWrapper = styled.div`
     align-items: center;
     background: skyblue;
   }
-
 `;
 
-export default ({ value, onChange, onInsert }) => {
+const TodoInput = ({onInsert}) => {
 
   // enter key
   const handleKeyPress = (e) => {
@@ -39,8 +41,15 @@ export default ({ value, onChange, onInsert }) => {
 
   return (
     <TodoInputWrapper>
-      <input onChange={onChange} value={value} onKeyDown={handleKeyPress} />
-      <div className="add-button" onClick={onInsert}>add</div>
+      {/* <input onChange={} value="" onKeyDown={handleKeyPress} /> */}
+      <input onKeyDown={handleKeyPress} />
+      <div className="add-button" onClick={() => onInsert()}>add</div>
     </TodoInputWrapper>
   );
 }
+
+const mapDispatchToProp = (dispatch) => bindActionCreators({
+  onInsert: actions.inputExcute
+}, dispatch);
+
+export default connect(null, mapDispatchToProp)(TodoInput);
