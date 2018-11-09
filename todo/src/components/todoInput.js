@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -30,22 +30,58 @@ const TodoInputWrapper = styled.div`
   }
 `;
 
-const TodoInput = ({onInsert}) => {
+class TodoInput extends Component {
+  constructor(props) {
+    super(props);
 
-  // enter key
-  const handleKeyPress = (e) => {
+    this.state = {
+      value: ''
+    };
+
+    this.validate = this.props.validate || (() => {});
+  }
+
+ /*  validate() {
+    return this.props.validate.bind(this) || (() => {});
+  } */
+
+  handleKeyPress(e) {
     if (e.key === 'Enter') {
-      onInsert();
+      e.preventDefault();
+      this.onInsert();
     }
   }
 
-  return (
-    <TodoInputWrapper>
-      {/* <input onChange={} value="" onKeyDown={handleKeyPress} /> */}
-      <input onKeyDown={handleKeyPress} />
-      <div className="add-button" onClick={() => onInsert()}>add</div>
-    </TodoInputWrapper>
-  );
+  onInsert() {
+    if (!this.validate(this.state.value)) {
+      return;
+    }
+
+    this.props.onInsert(this.state.value);
+    this.setState({
+      value: ''
+    });
+  }
+
+  onChange(e) {
+    this.setState({
+      value: e.target.value
+    });
+  }
+
+  render() {
+    return (
+      <TodoInputWrapper>
+        {/* <input onChange={} value="" onKeyDown={handleKeyPress} /> */}
+        <input
+          onChange={e => this.onChange(e)}
+          onKeyPress={e => this.handleKeyPress(e)}
+          value={this.state.value}
+        />
+        <div className="add-button" onClick={() => this.onInsert()}>add</div>
+      </TodoInputWrapper>
+    );
+  }
 }
 
 const mapDispatchToProp = (dispatch) => bindActionCreators({

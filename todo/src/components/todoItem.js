@@ -25,13 +25,15 @@ const ListWrap = styled.div`
 
 class TodoItem extends Component {
   render() {
-    const {done, children, onToggle, onRemove} = this.props;
-
+    const {done, children, onToggle, onRemove, idx} = this.props;
     return (
-      <ListWrap onClick={onToggle}>
+      <ListWrap onClick={() => onToggle(idx)}>
         <input type="checkbox" checked={done} readOnly />
         <div className={done ? "text hide" : "text"}>{children}</div>
-        <div className="remove" onClick={onRemove}>[Remove]</div>
+        <div className="remove" onClick={(e) => {
+          e.stopPropagation();
+          onRemove(idx);
+        }}>[Remove]</div>
       </ListWrap>
     );
   }
