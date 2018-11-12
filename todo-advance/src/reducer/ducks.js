@@ -1,5 +1,6 @@
 const initialState = {
-  items: []
+  items: [],
+  nowStatus: false
 }
 
 const scehema = {
@@ -36,6 +37,20 @@ export default function reducer(state = initialState, action) {
           ...items.slice(action.idx + 1, items.length)
         ]
       };
+    case DATALOADBEFORE:
+      return Object.assign({}, state, { nowStatus: true });
+
+    case DATALOADCOMPLETE:
+      console.log('DATAComplete', action);
+      return state;
+
+    case DATALOADFAIL:
+      console.log('DATALOADFAIL');
+      return state;
+
+    case END_CONNECTION:
+      return Object.assign({}, state, { nowStatus: false });
+
     default:
       return state;
   }
@@ -45,6 +60,12 @@ export default function reducer(state = initialState, action) {
 export const INPUT = 'INPUT';
 export const REMOVE = 'REMOVE';
 export const TOGGLE = 'TOGGLE';
+export const DATALOADBEFORE = 'DATALOADBEFORE';
+export const DATALOAD = 'DATALOAD';
+export const DATALOADCOMPLETE = 'DATALOADCOMPLETE';
+export const DATALOADFAIL = 'DATALOADFAIL';
+export const END_CONNECTION = 'END_CONNECTION';
+
 
 
 // action creators
