@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import App from './components/App';
+import Root from './components/Root';
 import registerServiceWorker from './registerServiceWorker';
 
 // redux
@@ -15,7 +15,7 @@ const store = initStore();
 ReactDOM.render(
   // (<Provider store={createStoreWithMiddleware(reducer)}>
   (<Provider store={store}>
-    <App />
+    <Root />
   </Provider>),
   document.getElementById('root')
 );

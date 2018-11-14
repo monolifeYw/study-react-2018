@@ -17,13 +17,13 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <React.Fragment>
         <PageTemplate>
           <StatusBar nowStatus={this.props.nowStatus} />
           <TodoInput validate={Validation} />
           <TodoList />
         </PageTemplate>
-      </div>
+      </React.Fragment>
     );
   }
 };
