@@ -1,4 +1,4 @@
-const initialState = {
+export const initialState = {
   items: [],
   nowStatus: false
 }
@@ -42,7 +42,11 @@ export default function reducer(state = initialState, action) {
 
     case DATALOADCOMPLETE:
       console.log('DATAComplete', action);
-      return state;
+      const { data } = action.datas.data;
+      return {
+        items: [...items, ...data]
+      }
+      // return state;
 
     case DATALOADFAIL:
       console.log('DATALOADFAIL');
@@ -50,6 +54,10 @@ export default function reducer(state = initialState, action) {
 
     case END_CONNECTION:
       return Object.assign({}, state, { nowStatus: false });
+
+    case '@@router/LOCATION_CHANGE':
+      console.log('@@router/LOCATION_CHANGE', action.payload);
+      return state;
 
     default:
       return state;

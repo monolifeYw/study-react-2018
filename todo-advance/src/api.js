@@ -1,10 +1,13 @@
 import axios from 'axios';
-const API_KEY = 'a95045330d2c32eabd568f273709ee39';
-export const API_URL = `http://api.openweathermap.org/data/2.5/forecast?appid=${API_KEY}`;
+// const API_KEY = 'a95045330d2c32eabd568f273709ee39';
+// export const API_URL = `http://api.openweathermap.org/data/2.5/forecast?appid=${API_KEY}`;
+
+export const API_URL = 'http://localhost:9090/mock/todo-advance';
 
 export function* fetcher(apiURL, reqDatas = {}) {
   console.log('fetcher', apiURL, reqDatas);
-  const url = `${apiURL}&q=london,us`;
+  // const url = `${apiURL}&q=london,us`;
+  const url = apiURL;
   return yield axios.get(url, reqDatas)
   .then(res => {
     console.log('[axios]', res);

@@ -2,7 +2,7 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 
 // reducers (= ducks)
-import reducer from './reducer/ducks';
+import reducer, { initialState } from './reducer/ducks';
 
 // import LoggerMiddleware from './lib/loggerMiddleware';
 import { createLogger } from 'redux-logger';
@@ -13,12 +13,14 @@ const sagaMiddleware = createSagaMiddleware();
 
 const middleWares = [createLogger(), sagaMiddleware];
 
-export default () => {
+export default (addMiddleWares = []) => {
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+  const applyMiddleWares = [...addMiddleWares, ...middleWares];
   const store = createStore(
     reducer,
+    initialState,
     composeEnhancers(
-      applyMiddleware(...middleWares)
+      applyMiddleware(...applyMiddleWares)
     )
   );
 
