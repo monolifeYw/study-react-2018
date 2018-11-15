@@ -1,17 +1,6 @@
-import { combineReducers } from 'redux';
-
 export const initialState = {
-  // todos
-  todos: {
-    items: []
-  },
-
-  // 현재 데이터 로딩상태 체크
-  status: {
-    nowStatus: false
-  },
-
-  locationInfo: null
+  items: [],
+  nowStatus: false
 }
 
 const scehema = {
@@ -19,8 +8,11 @@ const scehema = {
   isDone: false
 }
 
-const todoReducer = (state = initialState, action) => {
+// reducer
+export default function reducer(state = initialState, action) {
   const { items } = state;
+
+  console.log('reducer', action, items);
   switch(action.type) {
     case INPUT:
       return {
@@ -45,9 +37,8 @@ const todoReducer = (state = initialState, action) => {
           ...items.slice(action.idx + 1, items.length)
         ]
       };
-
     case DATALOADBEFORE:
-      return Object.assign({}, state, { items:[] });
+      return Object.assign({}, state, { items:[], nowStatus: true });
 
     case DATALOADCOMPLETE:
       console.log('DATAComplete', action);
@@ -55,38 +46,23 @@ const todoReducer = (state = initialState, action) => {
       return {
         items: [...items, ...data]
       }
+      // return state;
 
     case DATALOADFAIL:
       console.log('DATALOADFAIL');
       return state;
 
-    default:
-      return state;
-    }
-}
-
-const loadStatusReducer = (state = initialState, action) => {
-  switch(action.type) {
-    case DATALOADBEFORE:
-      return Object.assign({}, state, { nowStatus: true });
-
     case END_CONNECTION:
       return Object.assign({}, state, { nowStatus: false });
 
-    default:
-      return state;
-    }
-}
-
-const locationReducer = (state = initialState, action) => {
-  switch(action.type) {
     case '@@router/LOCATION_CHANGE':
       console.log('@@router/LOCATION_CHANGE', action.payload);
-      return action.payload;
+      return state;
+
     default:
       return state;
   }
-};
+}
 
 // actions
 export const INPUT = 'INPUT';
@@ -97,9 +73,3 @@ export const DATALOAD = 'DATALOAD';
 export const DATALOADCOMPLETE = 'DATALOADCOMPLETE';
 export const DATALOADFAIL = 'DATALOADFAIL';
 export const END_CONNECTION = 'END_CONNECTION';
-
-export default combineReducers({
-  todos: todoReducer,
-  status: loadStatusReducer,
-  locationInfo: locationReducer
-})

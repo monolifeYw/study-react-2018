@@ -12,7 +12,7 @@ import { connect } from 'react-redux';
 
 class TodoContainer extends Component {
   componentWillMount() {
-    console.log('componentWillMount');
+    console.log('componentWillMount', this.props);
     this.props.dataLoad();
   }
 
@@ -34,9 +34,11 @@ class TodoContainer extends Component {
 }
 
 function mapStateToProps(state) {
+  console.log('[mapStateToProps]', state);
+
   return {
-    nowStatus: state.nowStatus,
-    items: state.items
+    nowStatus: state.status.nowStatus,
+    items: state.todos.items
   }
 }
 
