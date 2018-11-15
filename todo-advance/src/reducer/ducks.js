@@ -14,9 +14,11 @@ export const initialState = {
   locationInfo: null
 }
 
-const scehema = {
-  value: '',
-  isDone: false
+const SCEHEMA = {
+  LIST: {
+    value: '',
+    isDone: false
+  }
 }
 
 const todoReducer = (state = initialState, action) => {
@@ -24,7 +26,7 @@ const todoReducer = (state = initialState, action) => {
   switch(action.type) {
     case INPUT:
       return {
-        items: [...items, Object.assign({}, scehema, { value: action.value })]
+        items: [...items, Object.assign({}, SCEHEMA.LIST, { value: action.value })]
       }
     case REMOVE:
       return {

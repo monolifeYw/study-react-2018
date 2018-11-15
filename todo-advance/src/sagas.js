@@ -45,9 +45,9 @@ function* endFetch(action) {
 }
 
 
-function* fetchData(action) {
+function* getDta(action) {
   try {
-    const datas = yield startFetch(API.fetcher, API.API_URL, {test: 123});
+    const datas = yield startFetch(API.getList);
     console.log('[fetchData]', datas, action);
     /* yield put({
       type: DATALOADCOMPLETE,
@@ -75,7 +75,7 @@ function* fetchData(action) {
 
 function* onInit() {
   console.log('[sagas] onInit');
-  yield takeEvery(DATALOAD, fetchData);
+  yield takeEvery(DATALOAD, getDta);
 }
 
 
