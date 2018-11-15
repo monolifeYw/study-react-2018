@@ -1,45 +1,12 @@
-import React, { Component } from 'react';
-import PageTemplate from './pageTemplate';
-import TodoInput from './todoInput';
-import TodoList from './todoList';
-import Validation from './validation';
-import StatusBar from './status';
+import React from 'react';
 
-import * as actions from '../reducer/ducks';
+export default props => {
+  return (
+    <div>
+      {React.Children.toArray(props.children)}
 
-import { connect } from 'react-redux';
-
-class App extends Component {
-  componentWillMount() {
-    console.log('componentWillMount');
-    this.props.dataLoad();
-  }
-
-  render() {
-    return (
-      <React.Fragment>
-        <PageTemplate>
-          <StatusBar nowStatus={this.props.nowStatus} />
-          <TodoInput validate={Validation} />
-          <TodoList />
-        </PageTemplate>
-      </React.Fragment>
-    );
-  }
-};
-
-function mapStateToProps({nowStatus}) {
-  return {
-    nowStatus
-  }
+      {/* <DialogContainer/> */}
+    </div>
+  );
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    dataLoad() {
-      dispatch({type: actions.DATALOAD})
-    }
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);

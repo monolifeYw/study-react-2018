@@ -12,7 +12,7 @@ const scehema = {
 export default function reducer(state = initialState, action) {
   const { items } = state;
 
-  console.log('reducer', action);
+  console.log('reducer', action, items);
   switch(action.type) {
     case INPUT:
       return {
@@ -38,7 +38,7 @@ export default function reducer(state = initialState, action) {
         ]
       };
     case DATALOADBEFORE:
-      return Object.assign({}, state, { nowStatus: true });
+      return Object.assign({}, state, { items:[], nowStatus: true });
 
     case DATALOADCOMPLETE:
       console.log('DATAComplete', action);

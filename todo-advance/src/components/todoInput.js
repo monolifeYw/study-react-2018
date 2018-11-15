@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import * as actions from '../reducer/ducks';
 
 const TodoInputWrapper = styled.div`
   display: flex;
@@ -30,7 +27,7 @@ const TodoInputWrapper = styled.div`
   }
 `;
 
-class TodoInput extends Component {
+export default class TodoInput extends Component {
   constructor(props) {
     super(props);
 
@@ -83,9 +80,3 @@ class TodoInput extends Component {
     );
   }
 }
-
-const mapDispatchToProp = (dispatch) => bindActionCreators({
-  onInsert: actions.inputExcute
-}, dispatch);
-
-export default connect(null, mapDispatchToProp)(TodoInput);
