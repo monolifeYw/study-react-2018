@@ -9,7 +9,7 @@ import AppComponent from '../components/App';
  */
 class App extends Component {
   render() {
-    console.log(this.props);
+
     return (
       <AppComponent children={this.props.children} />
 

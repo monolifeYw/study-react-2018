@@ -28,6 +28,9 @@ import TodoContainer from './containers/todo';
 // css
 import './sass/index.scss';
 
+// test space
+import testExcute from './test';
+
 const history = createBrowserHistory();
 const addMiddleware = routerMiddleware(history);
 const store = initStore([addMiddleware]);
@@ -68,6 +71,7 @@ const Contents = () => {
           <Route path="/todo" component={TodoContainer} />
           <Route component={Home} />
       </Switch>
+      <button onClick={() => testExcute()}>testExcute</button>
     </App>
   );
 };

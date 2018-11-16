@@ -30,10 +30,10 @@ class TodoContainer extends Component {
     this.props.dataLoad();
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
+ /*  shouldComponentUpdate(nextProps, nextState) {
     console.log('[TodoContainer] shouldComponentUpdate', nextProps, nextState, this.props);
     return true;
-  }
+  } */
 
   setModal(selectInfo) {
     this.modal = selectInfo;

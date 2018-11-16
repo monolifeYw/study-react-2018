@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import dotProp from 'dot-prop-immutable'
 
 export const initialState = {
   // todos
@@ -32,15 +33,31 @@ const todoReducer = (state = initialState, action) => {
         items: [...items, Object.assign({}, SCEHEMA.LIST, { value: action.value })]
       }
     case REMOVE:
+
+      /* const dotP = dotProp.delete(items, action.idx);
+      console.log('dotP', dotP); */
       return {
-        // items: items.slice(0, items.length - 1)
+        items: dotProp.delete(items, action.idx)
+      };
+
+      // basic
+      /* return {
         items: [
           ...items.slice(0, action.idx),
           ...items.slice(action.idx + 1, items.length)
         ]
-      }
+      } */
     case TOGGLE:
+
+      /* const dotP = dotProp.toggle(items, `${action.idx}.isDone`);
+      console.log('dotP', dotP); */
       return {
+        ...state,
+        items: dotProp.toggle(items, `${action.idx}.isDone`)
+      }
+
+
+      /* return {
         ...state,
         items: [
           ...items.slice(0, action.idx),
@@ -50,7 +67,7 @@ const todoReducer = (state = initialState, action) => {
           },
           ...items.slice(action.idx + 1, items.length)
         ]
-      };
+      }; */
 
     case DATALOADBEFORE:
       return Object.assign({}, state, { items:[] });

@@ -31,11 +31,13 @@ const ListWrap = styled.div`
 
 class TodoItem extends Component {
 
-  shouldComponentUpdate(nextProps, nextState) {
+
+  //@todo 분석 필요 - error 코드 : 삭제 시에 갱신 안됨
+  /* shouldComponentUpdate(nextProps, nextState) {
     console.log('[TodoItem] shouldComponentUpdate', nextProps, nextState, this.props);
     return !(nextProps.done === this.props.done)
     // return true;
-  }
+  } */
 
   render() {
     const {done, children, onToggle, onRemove, onDetailView} = this.props;
