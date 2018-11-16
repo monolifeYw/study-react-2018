@@ -20,19 +20,37 @@ const ListWrap = styled.div`
     font-size: 0.8rem;
   }
 
+  .view {
+    margin-left: 1rem;
+    color: green;
+    font-size: 0.8rem;
+  }
+
 `;
 
 
 class TodoItem extends Component {
+
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('[TodoItem] shouldComponentUpdate', nextProps, nextState, this.props);
+    return !(nextProps.done === this.props.done)
+    // return true;
+  }
+
   render() {
-    const {done, children, onToggle, onRemove, idx} = this.props;
+    const {done, children, onToggle, onRemove, onDetailView} = this.props;
+    // console.log('onDetailView', onDetailView);
     return (
-      <ListWrap onClick={() => onToggle(idx)}>
+      <ListWrap onClick={() => onToggle()}>
         <input type="checkbox" checked={done} readOnly />
         <div className={done ? "text hide" : "text"}>{children}</div>
+        <div className="view" onClick={(e) => {
+          e.stopPropagation();
+          onDetailView();
+        }}>[Detail]</div>
         <div className="remove" onClick={(e) => {
           e.stopPropagation();
-          onRemove(idx);
+          onRemove();
         }}>[Remove]</div>
       </ListWrap>
     );

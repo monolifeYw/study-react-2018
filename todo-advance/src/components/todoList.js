@@ -16,7 +16,8 @@ export default class TodoList extends Component {
     const {
       items,
       onRemove,
-      onToggle
+      onToggle,
+      onDetailView
     } = this.props;
 
     return (
@@ -25,7 +26,17 @@ export default class TodoList extends Component {
         <TodoItem>진행하는 부분</TodoItem> */}
         {items.map((item, idx) => {
           return (
-            <TodoItem key={idx} idx={idx} done={item.isDone} onToggle={() => onToggle(idx)} onRemove={() => onRemove(idx)}>{item.value}</TodoItem>
+            <TodoItem
+              key={idx}
+              idx={idx}
+              done={item.isDone}
+              onToggle={() => onToggle(idx)}
+              onRemove={() => onRemove(idx)}
+              onDetailView={() => onDetailView({
+                idx,
+                item: Object.assign({}, item)
+              })}
+            >{item.value}</TodoItem>
           );
         })}
       </div>

@@ -3,7 +3,8 @@ import { combineReducers } from 'redux';
 export const initialState = {
   // todos
   todos: {
-    items: []
+    items: [],
+    testRandom: 7
   },
 
   // 현재 데이터 로딩상태 체크
@@ -22,6 +23,8 @@ const SCEHEMA = {
 }
 
 const todoReducer = (state = initialState, action) => {
+  // initialState 의 todos 를 기준으로 진행됨
+  // CombineReducers 참고
   const { items } = state;
   switch(action.type) {
     case INPUT:
@@ -38,6 +41,7 @@ const todoReducer = (state = initialState, action) => {
       }
     case TOGGLE:
       return {
+        ...state,
         items: [
           ...items.slice(0, action.idx),
           {
@@ -55,6 +59,7 @@ const todoReducer = (state = initialState, action) => {
       console.log('DATAComplete', action);
       const { data } = action.datas.data;
       return {
+        ...state,
         items: [...items, ...data]
       }
 
@@ -67,6 +72,7 @@ const todoReducer = (state = initialState, action) => {
     }
 }
 
+
 const loadStatusReducer = (state = initialState, action) => {
   switch(action.type) {
     case DATALOADBEFORE:
@@ -74,6 +80,9 @@ const loadStatusReducer = (state = initialState, action) => {
 
     case END_CONNECTION:
       return Object.assign({}, state, { nowStatus: false });
+
+    /* case DETAILVIEW:
+      return Object.assign({}, state, { nowStatus: true }); */
 
     default:
       return state;
@@ -94,6 +103,7 @@ const locationReducer = (state = initialState, action) => {
 export const INPUT = 'INPUT';
 export const REMOVE = 'REMOVE';
 export const TOGGLE = 'TOGGLE';
+
 export const DATALOADBEFORE = 'DATALOADBEFORE';
 export const DATALOAD = 'DATALOAD';
 export const DATALOADCOMPLETE = 'DATALOADCOMPLETE';
