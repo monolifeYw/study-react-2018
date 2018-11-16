@@ -1,5 +1,9 @@
 import { combineReducers } from 'redux';
-import dotProp from 'dot-prop-immutable'
+import dotProp from 'dot-prop-immutable';
+
+import { setLog } from 'src/weblog';
+const log = setLog('reducer');
+
 
 export const initialState = {
   // todos
@@ -29,6 +33,7 @@ const todoReducer = (state = initialState, action) => {
   const { items } = state;
   switch(action.type) {
     case INPUT:
+      log('INPUT', state);
       return {
         items: [...items, Object.assign({}, SCEHEMA.LIST, { value: action.value })]
       }
@@ -48,7 +53,7 @@ const todoReducer = (state = initialState, action) => {
         ]
       } */
     case TOGGLE:
-
+      log('TOGGLE');
       /* const dotP = dotProp.toggle(items, `${action.idx}.isDone`);
       console.log('dotP', dotP); */
       return {
@@ -73,7 +78,7 @@ const todoReducer = (state = initialState, action) => {
       return Object.assign({}, state, { items:[] });
 
     case DATALOADCOMPLETE:
-      console.log('DATAComplete', action);
+      log('DATAComplete', action);
       const { data } = action.datas.data;
       return {
         ...state,
@@ -81,7 +86,7 @@ const todoReducer = (state = initialState, action) => {
       }
 
     case DATALOADFAIL:
-      console.log('DATALOADFAIL');
+      log('DATALOADFAIL');
       return state;
 
     default:
@@ -109,7 +114,7 @@ const loadStatusReducer = (state = initialState, action) => {
 const locationReducer = (state = initialState, action) => {
   switch(action.type) {
     case '@@router/LOCATION_CHANGE':
-      console.log('@@router/LOCATION_CHANGE', action.payload);
+      log('@@router/LOCATION_CHANGE', action.payload);
       return action.payload;
     default:
       return state;

@@ -31,6 +31,9 @@ import './sass/index.scss';
 // test space
 import testExcute from './test';
 
+// debug
+// import {initialize} from './weblog';
+
 const history = createBrowserHistory();
 const addMiddleware = routerMiddleware(history);
 const store = initStore([addMiddleware]);
@@ -90,3 +93,6 @@ ReactDOM.render(
   document.getElementById('root')
 );
 registerServiceWorker();
+
+// 환경에 따른 분기 필요
+// initialize();
