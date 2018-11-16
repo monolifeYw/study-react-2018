@@ -25,6 +25,9 @@ import App from './containers/App';
 import { Home, About, Nav, Posts } from './components/pages';
 import TodoContainer from './containers/todo';
 
+// css
+import './sass/index.scss';
+
 const history = createBrowserHistory();
 const addMiddleware = routerMiddleware(history);
 const store = initStore([addMiddleware]);
