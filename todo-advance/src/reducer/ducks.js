@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import dotProp from 'dot-prop-immutable';
 
 import { setLog } from 'src/weblog';
-const log = setLog('reducer');
+const log = setLog('reduce');
 
 
 export const initialState = {

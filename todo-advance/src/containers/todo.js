@@ -11,6 +11,8 @@ import * as actions from '../reducer/ducks';
 
 import { connect } from 'react-redux';
 
+import DocumentModalControl from '../utils';
+
 class TodoContainer extends Component {
 
   constructor(props) {
@@ -36,10 +38,16 @@ class TodoContainer extends Component {
   } */
 
   setModal(selectInfo) {
+    DocumentModalControl.dispatchEventer(DocumentModalControl.OPEN);
     this.modal = selectInfo;
     this.setState({
       isModalOpen: true
     });
+  }
+
+  onModalClose() {
+    DocumentModalControl.dispatchEventer(DocumentModalControl.CLOSE);
+    this.setState({ isModalOpen: false });
   }
 
   render() {
@@ -73,7 +81,7 @@ class TodoContainer extends Component {
           idx={this.modal.idx}
           title={this.modal.item.value}
           done={this.modal.item.isDone ? 'Finished' : 'Doing' }
-          onClose={() => this.setState({ isModalOpen: false })}
+          onClose={() => this.onModalClose()}
         />}
       </React.Fragment>
     );

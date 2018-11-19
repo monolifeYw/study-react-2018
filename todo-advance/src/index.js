@@ -43,6 +43,7 @@ const store = initStore([addMiddleware]);
 })(Switch); */
 
 const Contents = () => {
+
   return (
     <App>
       <Nav />
