@@ -87,17 +87,18 @@ const TestDIV = styled(TestDivTmpl)`
 // case.3-1
 const StyledDIV = styled(AboutStyled)`
   margin: 0 auto;
+  // override
+  width: 150px;
 `
 // case 3-2
 const StyledTestTmpl = WrappedComponent => ({className}) => (
-  <div id="styled_test" className={className}>
-    <WrappedComponent />
-  </div>
+  <WrappedComponent id="styled_test" className={className}>234
+  </WrappedComponent>
 )
 /* const StyledTestTmpl = (({ WrappedComponent }) => (
   <div id="styled_test" className={className}></div>
 )) */
-const StyledTmplDIV = styled(AboutStyled)`
+const StyledTmplDIV = styled(StyledTestTmpl(AboutStyled))`
   background: green;
   // override
   width: 50px;
