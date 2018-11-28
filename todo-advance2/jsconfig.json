@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "es2015",
+    "baseUrl": ".",
+    "paths": {
+      "components": ["app/components/*"],
+      "containers": ["app/containers/*"]
+    }
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "include": [
+    "app/**/*"
+  ],
+}
