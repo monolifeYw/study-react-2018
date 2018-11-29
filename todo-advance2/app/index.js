@@ -22,7 +22,7 @@ import initStore from './middleware'
 import App from './containers/App'
 
 // components
-import { Home, About, Nav, Posts } from './components/pages'
+import { Home, About, Nav, Posts, ModalTestPage } from './components/pages'
 import TodoContainer from './containers/todo'
 
 // css
@@ -68,6 +68,7 @@ const Contents = () => {
           }}
         />
         <Route path="/todo" component={TodoContainer} />
+        <Route path="/modal" component={ModalTestPage} />
         <Route component={Home} />
       </Switch>
       <button onClick={() => testExcute()}>testExcute</button>

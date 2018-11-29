@@ -15,6 +15,7 @@ export default function Nav() {
         <li><Link to="/about/react-proto">About name</Link></li>
         <li><Link to="/posts">Posts</Link></li>
         <li><Link to="/todo">Todo List</Link></li>
+        <li><Link to="/modal">Modal Test</Link></li>
       </ul>
 
       <ul>
@@ -23,6 +24,7 @@ export default function Nav() {
         <li><NavLink exact to="/about/react-proto" activeStyle={activeStyle}>About name</NavLink></li>
         <li><NavLink exact to="/posts" activeStyle={activeStyle}>Posts</NavLink></li>
         <li><NavLink exact to="/todo" activeStyle={activeStyle}>Todo List</NavLink></li>
+        <li><NavLink exact to="/modal" activeStyle={activeStyle}>Modal Test</NavLink></li>
       </ul>
     </React.Fragment>
   );
