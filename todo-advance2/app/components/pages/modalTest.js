@@ -42,7 +42,10 @@ class ModalTestPage extends Component {
             type: ModalType.INCOME_ALARM_COMPLETE,
             dimmedType: DimmedType.BLACK
           })}>Income Modal.2</CustomBtn2>
-          <CustomBtn2 btnType={CustomBtnType2.TYPE2}>SNS Modal</CustomBtn2>
+          <CustomBtn2 btnType={CustomBtnType2.TYPE1} onClick={() => this.modalOpen({
+            type: ModalType.SHARE,
+            dimmedType: DimmedType.BLACK
+          })}>SNS Modal</CustomBtn2>
         </div>
         {this.state.isModalOpen && <ModalContainer
           {...this.state.infoModal}

@@ -1,9 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
-import { StyledIncomeModal } from './WithModals'
+import WithModalStyled, { StyledIncomeModal } from './WithModals'
 import { ModalType } from '../../constants'
 
-const SubscribeModal = styled(StyledIncomeModal)`
+
+const SubscribeModal = styled(WithModalStyled(StyledIncomeModal))`
   width: 272px;
   height: 239px;
 
@@ -18,11 +19,13 @@ const TITLE = {
   [ModalType.INCOME_ALARM_COMPLETE]: '알림 완료',
 }
 
-const Modal = ({ type }) => {
+const Modal = ({ type, onClose }) => {
   return (
     <SubscribeModal className="modal-content">
       <div className="modal-header">
-        <button className="modal-btn-close"><span>닫기</span></button>
+        <button className="modal-btn-close" onClick={() => onClose()}>
+          <span>닫기</span>
+        </button>
       </div>
       <div className="modal-body">
         <p className="modal-title">{TITLE[type]}</p>

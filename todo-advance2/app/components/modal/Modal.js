@@ -3,6 +3,7 @@ import DimComponent from './Dimmed'
 // import RootModal from '../../components/modal/RootModal'
 
 import IncomeModalType1 from './IncomeModalType1'
+import SnsModalType from './SnsModalType'
 
 import styled from 'styled-components'
 
@@ -38,6 +39,8 @@ const checkModal = ({ type, ...props }) => {
     case ModalType.INCOME_SUBSCRIBE_COMPLETE:
     case ModalType.INCOME_ALARM_COMPLETE:
       return <IncomeModalType1 type={type} {...props} />
+    case ModalType.SHARE:
+      return <SnsModalType {...props} />
   }
 }
 
