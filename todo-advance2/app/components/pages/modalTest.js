@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import CustomBtn2, { CustomBtnType2 } from '../style/CustomBtnType2'
-import ModalContainer, { ModalType } from '../../containers/modal/ModalContainer'
+import ModalContainer from '../modal/Modal'
+import { ModalType, DimmedType } from '../../constants'
 
 class ModalTestPage extends Component {
   constructor(props) {
@@ -12,12 +13,12 @@ class ModalTestPage extends Component {
     }
   }
 
-  modalOpen() {
+  modalOpen({ type, dimmedType }) {
     this.setState({
       isModalOpen: true,
       infoModal: {
-        type: ModalType.INCOME,
-        dimmedType: 'black',
+        type,
+        dimmedType
       }
     })
   }
@@ -33,8 +34,14 @@ class ModalTestPage extends Component {
     return (
       <React.Fragment>
         <div>
-          <CustomBtn2 btnType={CustomBtnType2.TYPE1} onClick={() => this.modalOpen()}>Income Modal.1</CustomBtn2>
-          <CustomBtn2 btnType={CustomBtnType2.TYPE1}>Income Modal.2</CustomBtn2>
+          <CustomBtn2 btnType={CustomBtnType2.TYPE1} onClick={() => this.modalOpen({
+            type: ModalType.INCOME_SUBSCRIBE_COMPLETE,
+            dimmedType: DimmedType.BLACK
+          })}>Income Modal.1</CustomBtn2>
+          <CustomBtn2 btnType={CustomBtnType2.TYPE1} onClick={() => this.modalOpen({
+            type: ModalType.INCOME_ALARM_COMPLETE,
+            dimmedType: DimmedType.BLACK
+          })}>Income Modal.2</CustomBtn2>
           <CustomBtn2 btnType={CustomBtnType2.TYPE2}>SNS Modal</CustomBtn2>
         </div>
         {this.state.isModalOpen && <ModalContainer

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
+import { DimmedType } from '../../constants'
 
 const DimStyledBlackDiv = styled.div`
   position: fixed;
@@ -25,7 +26,7 @@ class DimContainer extends Component {
   render() {
     return (
       <React.Fragment>
-        {this.props.dimmedType === 'black' ? <DimStyledBlackDiv /> : <DimStyledWhiteDiv />}
+        {this.props.dimmedType === DimmedType.BLACK ? <DimStyledBlackDiv /> : <DimStyledWhiteDiv />}
       </React.Fragment>
     )
   }
