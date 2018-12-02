@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+
+  <title>JS Bin</title>
+  <script>
+    window.onload = function() {
+      document.getElementById('setup_btn').addEventListener('click', function() {
+        window.sessionStorage.setItem('isLogin', false);
+        window.sessionStorage.setItem('dealId', 777);
+      });
+
+      document.getElementById('check_btn').addEventListener('click', function() {
+        console.log('sessionStorage', window.sessionStorage);
+        console.log('sessionStorage info', window.sessionStorage.getItem('isLogin'));
+      });
+
+      document.getElementById('remove_btn').addEventListener('click', function() {
+        window.sessionStorage.removeItem('isLogin');
+        window.sessionStorage.removeItem('dealId');
+      });
+    }
+  </script>
+</head>
+<body>
+  <button id="setup_btn">setup</button>
+  <button id="check_btn">check</button>
+  <button id="remove_btn">remove</button>
+</body>
+</html>
