@@ -31,6 +31,10 @@ const DialogTmpl = styled.div`
     display: flex;
     align-items: center;
   }
+
+  &.hide {
+    display: none
+  }
 `
 
 const checkModal = ({ type, ...props }) => {
@@ -51,10 +55,12 @@ class ModalContainer extends Component {
   }
 
   render() {
+    const viewClass = !this.props.isShow ? 'hide' : ''
+
     return (
       <React.Fragment>
         <DimComponent {...this.props}></DimComponent>
-        <DialogTmpl>
+        <DialogTmpl className={viewClass}>
           <div className="modal-dialog align_center">
             {checkModal(this.props)}
           </div>

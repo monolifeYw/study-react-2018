@@ -47,10 +47,19 @@ class ModalTestPage extends Component {
             dimmedType: DimmedType.BLACK
           })}>SNS Modal</CustomBtn2>
         </div>
-        {this.state.isModalOpen && <ModalContainer
+
+        <ModalContainer
           {...this.state.infoModal}
+          isShow={this.state.isModalOpen}
           onClose={() => this.modalClose()}
-        />}
+        />
+
+        {/* {this.state.isModalOpen && <ModalContainer
+          {...this.state.infoModal}
+          isShow={this.state.isModalOpen}
+          onClose={() => this.modalClose()}
+        />} */}
+
       </React.Fragment>
     )
   }
