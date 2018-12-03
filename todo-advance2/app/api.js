@@ -88,3 +88,27 @@ export function* getList() {
     }
   )
 }
+
+export function* getList2() {
+  return yield fetcher(
+    'http://localhost:9090/mock/todo-advance-transfer',
+    'get',
+    {
+      test: 123
+    },
+    function (datas) {
+      // ducks 내 SCEHEMA.LIST 참고
+      datas.data = datas.data.map(list => {
+        return Object.assign({}, {
+          value: list.title,
+          isDone: !list.finish
+        })
+      })
+      return datas
+    },
+    {
+      param: { a: 1},
+      cls: {b: 2}
+    }
+  )
+}

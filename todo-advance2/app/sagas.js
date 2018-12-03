@@ -1,5 +1,12 @@
 // effect
-import { put, call, takeEvery, all } from 'redux-saga/effects';
+import {
+  put,
+  call,
+  takeEvery,
+  all,
+  fork,
+  take
+} from 'redux-saga/effects'
 import {
   DATALOAD,
   DATALOADCOMPLETE,
@@ -8,6 +15,8 @@ import {
   END_CONNECTION
 } from './reducer/ducks';
 import * as API from './api';
+
+const delay = (ms) => new Promise(res => setTimeout(res, ms));
 
 /* function* getData(action) {
   console.log('[sagas] getData', action);
@@ -78,9 +87,63 @@ function* onInit() {
   yield takeEvery(DATALOAD, getDta);
 }
 
+function* onInitTest() {
+  try {
+    yield call(fetchAll)
+  } catch(e) {
+
+  }
+}
+
+function* fetchAll() {
+  const task1 = yield fork(fetchResource)
+  const task2 = yield fork(fetchResource2)
+
+  console.log('task1', task1)
+  console.log('task2', task2)
+
+  yield take('DATA_FETCH_RESOURCE1')
+  yield take('DATA_FETCH_RESOURCE2')
+
+
+  console.log('task1', task1)
+  console.log('task2', task2)
+
+  // yield put({
+  //   type: DATALOADCOMPLETE,
+  //   datas: task1.data.data
+  // })
+  console.log('ddd')
+}
+
+function* fetchResource() {
+  const datas = yield call(API.getList)
+
+  console.log('[fetchData]', datas)
+  yield call(delay, 1000)
+
+  yield put({
+    type: 'DATA_FETCH_RESOURCE1',
+    datas
+  })
+}
+
+function* fetchResource2() {
+  const datas = yield call(API.getList2)
+
+  console.log('[fetchData]', datas)
+  yield call(delay, 1000)
+
+  yield put({
+    type: 'DATA_FETCH_RESOURCE2',
+    datas
+  })
+}
+
 
 export default function* rootSagas() {
   yield all([
-    onInit()
-  ]);
+    // onInit()
+    onInitTest()
+  ])
 };
